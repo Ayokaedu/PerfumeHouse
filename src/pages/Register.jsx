@@ -92,7 +92,7 @@ const Register = () => {
           className="form-control mb-2"
         />
         <div>
-          <input type="checkbox" checked={agree}/> I agree to{" "}
+          <input type="checkbox" checked={agree} onChange={(e)=> setAgree(e.target.checked)} /> I agree to{" "}
           <a href="##">Terms of Service</a> and{" "}
           <a href="###">Privacy Policies</a>
         </div>

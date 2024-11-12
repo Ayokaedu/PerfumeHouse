@@ -1,4 +1,7 @@
 import React from "react";
+import { IoMdStar } from "react-icons/io";
+import {CartContext} from "../context";
+import { useContext } from "react";
 
 const SinglePerfume = ({
   id,
@@ -8,7 +11,9 @@ const SinglePerfume = ({
   price,
   itemsLeft,
   oldPrice,
+  inCart,
 }) => {
+  const {addToCart} = useContext(CartContext)
   return (
     <div
       style={{ width: "256.62px" }}
@@ -18,7 +23,9 @@ const SinglePerfume = ({
       <div className="p-3">
         <h2 className="fs-6 fw-bold mb-2">{title}</h2>
         <div className="d-flex gap-2 mb-0">
-          <p className="text-dark fw-bold fs-3">stars{rating}</p>
+          <IoMdStar className="text-warning" />
+    
+          <p className="text-dark fw-bold fs-3">{rating}</p>
           <p>({itemsLeft})</p>
         </div>
         <div className="d-flex gap-2">
@@ -27,9 +34,14 @@ const SinglePerfume = ({
         </div>
         <button
           style={{ height: "40px" }}
-          className="w-100 rounded-2 main-color-bg text-white border-0"
+          className={`w-100 rounded-2 main-color-bg text-white border-0 ${
+            inCart ? 'bg-secondary-subtle' : 'main-color=bg'
+          }`}
+          onClick={()=> addToCart({image, title, price, id})}
+          disabled = {inCart}
         >
-          Add to Cart
+          {inCart ? 'Added To Cart' : 'Add To Cart'}
+         
         </button>
       </div>
     </div>
